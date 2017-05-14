@@ -23,9 +23,13 @@ set old kernel as default
 reboot
 
     sudo reboot
+    uvt-kvm wait --insecure livepatch-demo
     uvt-kvm ssh --insecure livepatch-demo
 
 snap install
+
+    sudo apt update
+    sudo apt install snapd
 
     sudo snap install canonical-livepatch
 

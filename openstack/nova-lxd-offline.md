@@ -12,3 +12,5 @@ set apt-mirror
 deploy
 
     juju deploy ./bundle-ocata-novalxd-offline.yaml
+
+configure

@@ -33,10 +33,12 @@ snap install
 
     sudo snap install canonical-livepatch
 
-enable
+visit https://auth.livepatch.canonical.com/ and enable
 
-    canonical-livepatch enable
+    sudo canonical-livepatch enable <TOKEN>
 
 status
 
     canonical-livepatch status --verbose
+
+    lsmod | grep livepatch

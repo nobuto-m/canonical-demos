@@ -3,15 +3,12 @@ clone
     git clone https://github.com/nobuto-m/openstack-on-lxd.git -b lxd
     cd openstack-on-lxd/
 
-add model
+set apt-mirror
 
-    juju add-model nova-lxd-offline \
-        --config apt-mirror=http://10.0.8.3/archive.ubuntu.com/ubuntu
-
-unset proxy
-
-    juju model-config apt-http-proxy=
+    juju model-config \
+        apt-http-proxy= \
+        apt-mirror=http://10.0.8.3/archive.ubuntu.com/ubuntu
 
 deploy
 
-    juju deploy ./openstack-on-lxd/bundle-ocata-novalxd-offline.yaml
+    juju deploy ./bundle-ocata-novalxd-offline.yaml

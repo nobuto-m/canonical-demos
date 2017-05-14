@@ -13,11 +13,11 @@ proxy (optional)
 
 install old kernel
 
-    sudo apt install linux-{headers,image}-4.4.0-21-generic
+    sudo apt install linux-{headers,image}-4.4.0-31-generic
 
 set old kernel as default
 
-    echo 'GRUB_DEFAULT="Advanced options for Ubuntu>Ubuntu, with Linux 4.4.0-21-generic"' | sudo tee /etc/default/grub.d/default.cfg
+    echo 'GRUB_DEFAULT="Advanced options for Ubuntu>Ubuntu, with Linux 4.4.0-31-generic"' | sudo tee /etc/default/grub.d/default.cfg
     sudo update-grub
 
 reboot

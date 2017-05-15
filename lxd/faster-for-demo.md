@@ -22,3 +22,11 @@
     lxc profile device set default eth0 mtu 9000
 
     lxc profile device add default root disk path=/ pool=default
+
+    lxc network attach lxdbr0 squid-deb-proxy eth0
+    lxc config device set squid-deb-proxy eth0 mtu 9000
+    lxc config device set squid-deb-proxy eth0 ipv4.address 10.0.8.2
+
+    lxc network attach lxdbr0 mirror eth0
+    lxc config device set mirror eth0 mtu 9000
+    lxc config device set mirror eth0 ipv4.address 10.0.8.3

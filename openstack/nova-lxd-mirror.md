@@ -11,7 +11,7 @@ set apt-mirror
 
 deploy
 
-    juju deploy ./bundle-ocata-novalxd-offline.yaml
+    time (juju deploy ./bundle-ocata-novalxd-mirror.yaml && juju wait -v)
 
 configure
 

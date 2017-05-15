@@ -17,3 +17,8 @@
         source=ubuntu-vg \
         lvm.thinpool_name=LXDPool \
         volume.block.mount_options=discard,nobarrier
+
+    lxc network attach-profile lxdbr0 default eth0
+    lxc profile device set default eth0 mtu 9000
+
+    lxc profile device add default root disk path=/ pool=default

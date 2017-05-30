@@ -2,6 +2,10 @@ create kvm machine
 
     uvt-kvm create livepatch-demo release=xenial
 
+set cpu passthrough (optional). add `<cpu mode='host-passthrough'/>`.
+
+    virsh edit livepatch-demo
+
 ssh
 
     uvt-kvm wait --insecure livepatch-demo

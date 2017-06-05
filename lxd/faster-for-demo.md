@@ -16,7 +16,7 @@
     lxc storage create default lvm \
         source=ubuntu-vg \
         lvm.thinpool_name=LXDPool \
-        volume.block.mount_options=discard,nobarrier
+        volume.block.mount_options=discard,nobarrier,data=writeback
 
     lxc network attach-profile lxdbr0 default eth0
     lxc profile device set default eth0 mtu 9000

@@ -13,11 +13,11 @@ set apt-mirror
 
 deploy
 
-    time (juju deploy ./bundle-pike-novalxd-mirror.yaml && juju wait -v)
+    time (juju deploy ./bundle-ocata-novalxd-mirror.yaml && juju wait -v)
 
-fix privileged and nested lxd by updating
-
-    juju run --application nova-lxd 'apt install -y -t xenial-backports lxd'
+#fix privileged and nested lxd by updating
+#
+#    juju run --application nova-lxd 'apt install -y -t xenial-backports lxd'
 
 configure
 

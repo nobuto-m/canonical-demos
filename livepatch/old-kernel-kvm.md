@@ -1,15 +1,28 @@
 create kvm machine
 
-    uvt-kvm create livepatch-demo release=xenial
+    [trusty]
+    uvt-kvm create livepatch-trusty release=trusty
 
-set cpu passthrough (optional). add `<cpu mode='host-passthrough'/>`.
+    [xenial]
+    uvt-kvm create livepatch-xenial release=xenial
 
-    virsh edit livepatch-demo
+set cpu passthrough (optional). add `<cpu mode='host-passthrough'/>`, which requires power-off and on
+
+    [trusty]
+    virsh edit livepatch-trusty
+
+    [xenial]
+    virsh edit livepatch-xenial
 
 ssh
 
-    uvt-kvm wait --insecure livepatch-demo
-    uvt-kvm ssh --insecure livepatch-demo
+    [trusty]
+    uvt-kvm wait --insecure livepatch-trusty
+    uvt-kvm ssh --insecure livepatch-trusty
+
+    [xenial]
+    uvt-kvm wait --insecure livepatch-xenial
+    uvt-kvm ssh --insecure livepatch-xenial
 
 proxy (optional)
 
@@ -17,25 +30,49 @@ proxy (optional)
 
 install old kernel
 
-    sudo apt install linux-{headers,image}-4.4.0-31-generic
+    [trusty]
+    sudo apt update
+    sudo apt install linux-{headers,image}-generic-lts-xenial linux-{headers,image}-4.4.0-78-generic
+
+    [xenial]
+    sudo apt update
+    sudo apt install linux-{headers,image}-4.4.0-77-generic
 
 set old kernel as default
 
-    echo 'GRUB_DEFAULT="Advanced options for Ubuntu>Ubuntu, with Linux 4.4.0-31-generic"' | sudo tee /etc/default/grub.d/default.cfg
+    [trusty]
+    echo 'GRUB_DEFAULT="Advanced options for Ubuntu>Ubuntu, with Linux 4.4.0-78-generic"' | sudo tee /etc/default/grub.d/default.cfg
     sudo update-grub
+
+    [xenial]
+    echo 'GRUB_DEFAULT="Advanced options for Ubuntu>Ubuntu, with Linux 4.4.0-77-generic"' | sudo tee /etc/default/grub.d/default.cfg
+    sudo update-grub
+
+snap install
+
+    sudo apt install snapd
+
+    sudo snap install canonical-livepatch
+
+regenerate uniq ID for trusty and reboot for /snap/bin in $PATH
+
+    [trusty]
+    sudo rm /etc/machine-id /var/lib/dbus/machine-id && sudo systemd-machine-id-setup
 
 reboot
 
     sudo reboot
-    uvt-kvm wait --insecure livepatch-demo
-    uvt-kvm ssh --insecure livepatch-demo
 
-snap install
+    [trusty]
+    uvt-kvm wait --insecure livepatch-trusty
+    uvt-kvm ssh --insecure livepatch-trusty
 
-    sudo apt update
-    sudo apt install snapd
+    ## sometimes restarting the daemon is needed (not sure why atm)
+    sudo systemctl restart snap.canonical-livepatch.canonical-livepatchd.service
 
-    sudo snap install canonical-livepatch
+    [xenial]
+    uvt-kvm wait --insecure livepatch-xenial
+    uvt-kvm ssh --insecure livepatch-xenial
 
 visit https://auth.livepatch.canonical.com/ and enable
 

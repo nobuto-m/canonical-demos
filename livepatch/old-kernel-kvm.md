@@ -80,6 +80,6 @@ visit https://auth.livepatch.canonical.com/ and enable
 
 status
 
-    canonical-livepatch status --verbose
+    canonical-livepatch status
 
     lsmod | grep livepatch
